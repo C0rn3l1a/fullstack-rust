@@ -1,7 +1,7 @@
 services:
   web:
-    container_name: guysite_instance
-    image: guysite:latest
+    container_name: fullstack-axum-yew
+    image: fullstack-axum-yew:latest
     env_file:
       - ./backend/.env
     # environment:

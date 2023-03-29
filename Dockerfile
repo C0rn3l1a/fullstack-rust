@@ -1,3 +1,6 @@
+#######################################################
+# BUILDER
+#######################################################
 FROM rust:latest AS builder
 ENV RUST_LOG "info"
 
@@ -25,7 +28,13 @@ RUN rm -rf ./frontend
 RUN cargo uninstall trunk
 RUN cargo uninstall wasm-bindgen-cli
 
-# USE MULTI STEP TO REDUCE SIZE
+#######################################################
+# RUNNER
+#######################################################
+
+FROM ubuntu
+WORKDIR /srv
+COPY --from=builder /srv .
 
 # finish setup
 EXPOSE 3000
