@@ -1,0 +1,26 @@
+# fly.toml file generated for fullstack-axum-yew on 2023-03-29T15:05:36+11:00
+
+app = "fullstack-axum-yew"
+kill_signal = "SIGINT"
+kill_timeout = 5
+mounts = []
+primary_region = "syd"
+processes = []
+
+[[services]]
+  internal_port = 3000
+  processes = ["app"]
+  protocol = "tcp"
+  [services.concurrency]
+    hard_limit = 25
+    soft_limit = 20
+    type = "connections"
+
+  [[services.ports]]
+    force_https = true
+    handlers = ["http"]
+    port = 80
+
+  [[services.ports]]
+    handlers = ["tls", "http"]
+    port = 443
