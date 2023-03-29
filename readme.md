@@ -1,0 +1,1 @@
+Example setup of fullstack rust app using axum + yew
