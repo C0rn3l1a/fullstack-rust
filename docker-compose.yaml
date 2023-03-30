@@ -4,11 +4,5 @@ services:
     image: fullstack-axum-yew:latest
     env_file:
       - ./backend/.env
-    # environment:
-    # - SMTP_USERNAME=
-    # - SMTP_PASSWORD=
-    # - SMTP_PROVIDER=
-    # - RECIEVER_EMAIL=
-    # - SENDER_EMAIL=
     ports:
       - "3000:3000"

@@ -32,7 +32,7 @@ RUN cargo uninstall wasm-bindgen-cli
 # RUNNER
 #######################################################
 
-FROM ubuntu
+FROM debian
 WORKDIR /srv
 COPY --from=builder /srv .
 

@@ -42,11 +42,11 @@ async fn handler() -> Html<&'static str> {
 }
 
 async fn send_email() {
-    let sender = env::var("$SENDER_EMAIL").unwrap();
-    let reciever = env::var("$RECIEVER_EMAIL").unwrap();
-    let smtp_username = env::var("$SMTP_USERNAME").unwrap();
-    let smtp_password = env::var("$SMTP_PASSWORD").unwrap();
-    let smtp_provider = env::var("$SMTP_PROVIDER").unwrap();
+    let sender = env::var("SENDER_EMAIL").unwrap();
+    let reciever = env::var("RECIEVER_EMAIL").unwrap();
+    let smtp_username = env::var("SMTP_USERNAME").unwrap();
+    let smtp_password = env::var("SMTP_PASSWORD").unwrap();
+    let smtp_provider = env::var("SMTP_PROVIDER").unwrap();
 
     let email = Message::builder()
         .from(format!("Sender <{sender}>").parse().unwrap())
@@ -71,19 +71,19 @@ async fn send_email() {
 }
 
 fn check_environment() {
-    if let Err(_) = env::var("$SMTP_USERNAME") {
+    if let Err(_) = env::var("SMTP_USERNAME") {
         panic!("env var `SMTP_USERNAME` needs to be set")
     }
-    if let Err(_) = env::var("$SMTP_PASSWORD") {
+    if let Err(_) = env::var("SMTP_PASSWORD") {
         panic!("env var `SMTP_PASSWORD` needs to be set")
     }
-    if let Err(_) = env::var("$SMTP_PROVIDER") {
+    if let Err(_) = env::var("SMTP_PROVIDER") {
         panic!("env var `SMTP_PROVIDER` needs to be set")
     }
-    if let Err(_) = env::var("$RECIEVER_EMAIL") {
+    if let Err(_) = env::var("RECIEVER_EMAIL") {
         panic!("env var `RECIEVER_EMAIL` needs to be set")
     }
-    if let Err(_) = env::var("$SENDER_EMAIL") {
+    if let Err(_) = env::var("SENDER_EMAIL") {
         panic!("env var `SENDER_EMAIL` needs to be set")
     }
 }
