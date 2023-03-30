@@ -1,6 +1,18 @@
 #######################################################
 # BUILDER
 #######################################################
+
+# Compile Styles
+FROM node:lts-alpine AS cssbuilder
+
+WORKDIR /
+
+COPY frontend ./frontend
+
+RUN npm i -g tailwindcss
+RUN cd ./frontend && NODE_ENV=production tailwindcss -c ./tailwind.config.js -o ./staic/tailwind.css --minify
+
+# Compile Rust
 FROM rust:latest AS builder
 ENV RUST_LOG "info"
 
@@ -17,12 +29,14 @@ RUN cd ./backend && cargo build --release
 RUN cp ./backend/target/release/backend ./server
 RUN rm -rf ./backend
 
+
 # Compile frontend
-COPY frontend ./frontend
+COPY --from=cssbuilder frontend ./frontend
 RUN cd ./frontend && trunk build --release
 RUN mkdir dist
 RUN cp -r ./frontend/dist/* ./dist
 RUN rm -rf ./frontend
+
 
 # Clean up compilation deps
 RUN cargo uninstall trunk

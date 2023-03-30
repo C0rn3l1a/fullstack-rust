@@ -3,5 +3,15 @@ name = "guy-site"
 version = "0.1.0"
 edition = "2021"
 
+[package.metadata.commands]
+build-release-css = "NODE_ENV=production tailwindcss -c ./tailwind.config.js -o ./static/tailwind.css --minify"
+build-css = "NODE_ENV=production tailwindcss -c ./tailwind.config.js -o ./static/tailwind.css"
+
+prebuild-dev = "cargo cmd build-css"
+build-dev = "trunk build"
+
+preserve = "cargo cmd build-css"
+serve = "trunk serve"
+
 [dependencies]
 yew = { version = "0.20.0", features = ["csr"] }

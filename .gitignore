@@ -1,6 +1,11 @@
+# Wildcard
 */target
 */dist
 */.env
 
+# root
 target
 .env
+
+# Frontend
+frontend/tailwind.css
