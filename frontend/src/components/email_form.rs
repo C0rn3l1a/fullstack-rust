@@ -1,11 +1,13 @@
 use wasm_bindgen::{JsCast, UnwrapThrowExt};
 use web_sys::HtmlInputElement;
 use yew::prelude::*;
+use crate::components::toast::ToastContext;
 
 #[function_component(EmailForm)]
 pub fn email_form_component() -> Html {
+    let msg_ctx = use_context::<ToastContext>().unwrap();
     let email_value = use_state(|| String::from(""));
-    
+
     let on_input = {
         // clone state into block to use it
         let email = email_value.clone();
@@ -25,9 +27,13 @@ pub fn email_form_component() -> Html {
         // clone state into block to use it
         let email = email_value.clone();
         Callback::from(move |_| {
-            let greeting = format!("Send email to: {}", *email);
-            // console log equivalent
-            web_sys::console::log_1(&greeting.into());
+            if email.len() > 0 {
+                let toast_message = format!("Send email to: {}", *email);
+                // console log equivalent
+                msg_ctx.dispatch(toast_message.clone());
+                web_sys::console::log_1(&toast_message.into());
+            }
+            email.set(String::from(""));
         })
     };
 
