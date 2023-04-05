@@ -326,6 +326,7 @@ dependencies = [
 name = "guy-site"
 version = "0.1.0"
 dependencies = [
+ "gloo-net 0.2.6",
  "gloo-timers",
  "js-sys",
  "reqwasm",

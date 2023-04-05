@@ -11,7 +11,7 @@ pub fn header_component() -> Html {
                     <span>{"Sample Website"}</span>
                 </div>
                 <div class="flex items-center gap-4">
-                    <button class="bg-orange-500 px-4 py-2 rounded">{"Explore"}</button>
+                    <button class="bg-orange-400 px-4 py-2 rounded">{"Explore"}</button>
                 </div>
             </nav>
         </header>
