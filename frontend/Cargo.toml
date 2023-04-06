@@ -14,6 +14,8 @@ preserve = "cargo cmd build-css"
 serve = "trunk serve"
 
 [dependencies]
+dotenv_codegen = "0.15.0"
+api_interfaces = { version="0.1", path = "../api_interfaces" }
 yew = { version = "0.20.0", features = ["csr"] }
 wasm-bindgen = "0.2.84"
 wasm-bindgen-futures = "0.4.34"

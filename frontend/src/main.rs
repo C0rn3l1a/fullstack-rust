@@ -1,5 +1,7 @@
-use yew::prelude::*;
+#[macro_use]
+extern crate dotenv_codegen;
 
+use yew::prelude::*;
 mod components;
 
 use components::{header::Header, email_form::EmailForm, toast::{Toast, ToastProvider}};

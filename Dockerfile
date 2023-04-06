@@ -7,7 +7,7 @@ FROM node:lts-alpine AS cssbuilder
 
 WORKDIR /
 
-COPY frontend ./frontend
+COPY . .
 
 RUN npm i -g tailwindcss
 RUN cd ./frontend && NODE_ENV=production tailwindcss -c ./tailwind.config.js -o ./staic/tailwind.css --minify
@@ -23,7 +23,7 @@ RUN rustup target add wasm32-unknown-unknown
 
 WORKDIR /srv
 # Compile server
-COPY backend ./backend
+COPY --from=cssbuilder . .
 
 RUN cd ./backend && cargo build --release
 RUN cp ./backend/target/release/backend ./server
@@ -31,7 +31,6 @@ RUN rm -rf ./backend
 
 
 # Compile frontend
-COPY --from=cssbuilder frontend ./frontend
 RUN cd ./frontend && trunk build --release
 RUN mkdir dist
 RUN cp -r ./frontend/dist/* ./dist
