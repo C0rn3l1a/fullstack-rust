@@ -62,7 +62,7 @@ pub fn email_form_component() -> Html {
             </div>
             <div class="flex flex-col items-start justify-center gap-2" >
                 <label class="flex items-center justify-center gap-2" for="phone"><span class="text-orange-400 material-symbols-outlined">{"phone"}</span> {"Phone"}</label>
-                <input required={true} type="tel" pattern="+[0-9]{12}" list="phone-example" minlength="9" maxlength="14" placeholder="phone" name="phone" id="phone" class="w-full text-gray-900 px-4 py-2 rounded"/>
+                <input required={true} type="tel" list="phone-example" minlength="9" maxlength="14" placeholder="phone" name="phone" id="phone" class="w-full text-gray-900 px-4 py-2 rounded"/>
                 <datalist id="phone-example">
                     <option value="+611234567890"></option>
                 </datalist>
@@ -81,7 +81,7 @@ pub fn email_form_component() -> Html {
 
             <div class="flex items-center justify-center gap-4 mt-auto">
                 // The following line controls and configures the Turnstile widget.
-                <div class="cf-turnstile" data-sitekey="0x4AAAAAAADus3Ly5ek0LbB3" data-theme="dark"></div>
+                <div class="cf-turnstile" data-sitekey="1x00000000000000000000AA" data-theme="dark"></div>
                 // end.
             </div>
             <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async={true} defer={true}></script>

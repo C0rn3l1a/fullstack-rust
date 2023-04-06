@@ -20,7 +20,7 @@ async fn main() {
         .nest_service("/", 
             get_service(ServeDir::new("dist")).handle_error(|_| async { (StatusCode::NOT_FOUND, "File not found") }),
         )
-        .route("/contact", post(routes::contact::contact))
+        .route("/api/contact", post(routes::contact::contact))
         .layer(CorsLayer::permissive());
 
     // run it
