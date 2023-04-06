@@ -2,7 +2,7 @@ use std::env;
 use serde::{Deserialize, Serialize};
 use reqwest::Client as ReqwestClient;
 
-#[derive(Deserialize, Serialize)]
+#[derive(Deserialize, Serialize, Debug)]
 pub struct CloudFareSiteVerifyBody {
     secret: String,
     response: String,
@@ -25,6 +25,7 @@ pub async fn cloudfare_site_check(cf_turnstile_token: String) -> Result<bool, re
         secret,
         response: cf_turnstile_token
     };
+    println!("Site Verify Request: {:?}",body);
     let client = ReqwestClient::builder().use_rustls_tls().build()?;
     let response = client.post(url).json(&body).send().await?;
     let site_verify: CloudFareSiteVerifyResponse  = response.json().await?;
