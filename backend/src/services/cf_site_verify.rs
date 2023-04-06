@@ -8,7 +8,7 @@ pub struct CloudFareSiteVerifyBody {
     response: String,
 }
 
-#[derive(Deserialize, Serialize)]
+#[derive(Deserialize, Serialize, Debug)]
 pub struct CloudFareSiteVerifyResponse {
     success: bool,
     challenge_ts: Option<String>,
@@ -28,6 +28,9 @@ pub async fn cloudfare_site_check(cf_turnstile_token: String) -> Result<bool, re
     let client = ReqwestClient::builder().use_rustls_tls().build()?;
     let response = client.post(url).json(&body).send().await?;
     let site_verify: CloudFareSiteVerifyResponse  = response.json().await?;
-    
+    if site_verify.success != true {
+        println!("Site Verify Error: {:?}",site_verify);
+    }
+
     Ok(site_verify.success)
 }
