@@ -26,7 +26,7 @@ pub async fn send_contact_email(email: String, name: String, phone: String, mess
     let creds = Credentials::new(smtp_username, smtp_password);
 
     // Open a remote connection to gmail
-    let mailer = SmtpTransport::relay(&smtp_provider)
+    let mailer = SmtpTransport::starttls_relay(&smtp_provider)
         .unwrap()
         .credentials(creds)
         .build();

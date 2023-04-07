@@ -626,8 +626,11 @@ dependencies = [
  "nom",
  "once_cell",
  "quoted_printable",
+ "rustls",
+ "rustls-pemfile",
  "socket2",
  "tokio",
+ "webpki-roots",
 ]
 
 [[package]]
