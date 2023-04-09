@@ -3,6 +3,8 @@ use axum::{
     routing::{post, get_service},
 };
 use std::{net::SocketAddr, env};
+use tracing_subscriber::{filter, prelude::*};
+use tracing::{info, debug, error, warn, trace};
 use tower_http::{cors::{CorsLayer}, services::ServeDir};
 use dotenv::dotenv;
 
@@ -13,6 +15,7 @@ mod routes;
 async fn main() {
     dotenv().ok(); // This line loads the environment variables from the ".env" file.
     check_environment();
+    setup_logger();
 
     // build our application with a route
     let app = Router::new()
@@ -25,7 +28,12 @@ async fn main() {
 
     // run it
     let addr = SocketAddr::from(([0, 0, 0, 0], 3000));
-    println!("listening on {}", addr);
+    
+    info!("listening on {}", addr);
+    debug!("listening on {}", addr);
+    error!("listening on {}", addr);
+    warn!("listening on {}", addr);
+    
     axum::Server::bind(&addr)
         .serve(app.into_make_service())
         .await
@@ -48,4 +56,13 @@ fn check_environment() {
     if let Err(_) = env::var("SENDER_EMAIL") {
         panic!("env var `SENDER_EMAIL` needs to be set")
     }
+}
+
+fn setup_logger() {
+    let logger = tracing_subscriber::fmt::layer()
+        .with_filter(filter::LevelFilter::DEBUG);
+
+    tracing_subscriber::registry()
+        .with(logger)
+        .init();
 }
