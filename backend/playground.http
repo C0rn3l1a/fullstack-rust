@@ -4,3 +4,7 @@ Content-Type: application/json
 {
     "message":"ECHO!"
 }
+
+###
+
+GEt http://localhost:3000/api/hi HTTP/1.1

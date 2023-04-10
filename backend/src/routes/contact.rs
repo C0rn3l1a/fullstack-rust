@@ -2,11 +2,12 @@
 use api_interfaces::routes::contact::{ContactBody, ContactResponse};
 use axum::Json;
 use reqwest::StatusCode;
+use tracing::error;
 
-use crate::services::{email::send_contact_email, cf_site_verify::cloudfare_site_check};
+use crate::services::{email::send_contact_email, cf_site_verify::cloudflare_site_check};
 
 pub async fn contact(Json(payload): Json<ContactBody>,) -> (StatusCode, Json<ContactResponse>) {
-    let site_verify = cloudfare_site_check(payload.cf_turnstile_token).await;
+    let site_verify = cloudflare_site_check(payload.cf_turnstile_token).await;
     match site_verify {
         Ok(verified) => {
             if verified == false {
@@ -15,7 +16,7 @@ pub async fn contact(Json(payload): Json<ContactBody>,) -> (StatusCode, Json<Con
         },
         Err(error) => {
             // TODO: Error handle
-            println!("Error with cf site verification: {:?}",error);
+            error!("Error with cf site verification: {:?}",error);
             return (StatusCode::INTERNAL_SERVER_ERROR, Json(ContactResponse {message: String::from("Something went wrong")}));
         }
     }

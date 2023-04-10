@@ -3,6 +3,7 @@ use lettre::{
     Message, SmtpTransport, Transport, message::{header,SinglePart},
     transport::smtp::authentication::Credentials
 };
+use tracing::error;
 use std::env;
 
 pub async fn send_contact_email(email: String, name: String, phone: String, message: String) -> Result<(), LettreError> {
@@ -36,7 +37,7 @@ pub async fn send_contact_email(email: String, name: String, phone: String, mess
         Ok(_) => Ok(()),
         Err(error) => {
             // TODO: Error handle
-            println!("Error with smtp transport: {:?}",error);
+            error!("Error with smtp transport: {:?}",error);
             Err(error)
         },
     }
