@@ -1,6 +1,7 @@
 use std::env;
 use serde::{Deserialize, Serialize};
 use reqwest::Client as ReqwestClient;
+use tracing::{warn, debug};
 
 #[derive(Deserialize, Serialize, Debug)]
 pub struct CloudflareSiteVerifyBody {
@@ -25,12 +26,17 @@ pub async fn cloudflare_site_check(cf_turnstile_token: String) -> Result<bool, r
         secret,
         response: cf_turnstile_token
     };
-    println!("Site Verify Request: {:?}",body);
+    
+    debug!("Site Verify Request: {:?}",body);
+    
     let client = ReqwestClient::builder().use_rustls_tls().build()?;
     let response = client.post(url).json(&body).send().await?;
     let site_verify: CloudflareSiteVerifyResponse  = response.json().await?;
+    
+    debug!("Site Verify Response: {:?}",body);
+    
     if site_verify.success != true {
-        println!("Site Verify Error: {:?}",site_verify);
+        warn!("Site Verify Error: {:?}",site_verify);
     }
 
     Ok(site_verify.success)
