@@ -1,7 +1,7 @@
 services:
   web:
     container_name: fullstack-axum-yew
-    image: fullstack-axum-yew:latest
+    image: fullstack-axum-leptos:latest
     env_file:
       - ./backend/.env
     ports:
