@@ -119,7 +119,7 @@ pub fn EmailFormComponent(cx: Scope) -> impl IntoView {
 
             <div class="flex items-center justify-center gap-4 mt-auto">
                 // The following line controls and configures the Turnstile widget.
-                <div class="cf-turnstile" data-sitekey="1x00000000000000000000AA" data-theme="dark"></div>
+                <div class="cf-turnstile" data-sitekey="0x4AAAAAAADus3Ly5ek0LbB3" data-theme="dark"></div>
                 // end.
             </div>
             <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async=true defer=true></script>
