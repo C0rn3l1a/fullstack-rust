@@ -10,6 +10,9 @@ mod components;
 
 use layouts::home::*;
 
+#[macro_use]
+extern crate dotenv_codegen;
+
 #[component]
 pub fn SimpleCounter(
     cx: Scope,
