@@ -9,6 +9,7 @@ processes = []
 
 [env]
   LOG_LEVEL = "INFO"
+  DATA_SITEKEY="0x4AAAAAAADus3Ly5ek0LbB3"
 
 [[services]]
   internal_port = 3000
