@@ -21,6 +21,9 @@ pub fn EmailFormComponent(cx: Scope) -> impl IntoView {
     let (form_value, set_form_value): (ReadSignal<Option<ContactBody>>, WriteSignal<Option<ContactBody>>) = create_signal(cx, None);
     let (state_value, set_state_value) = create_signal(cx, ComponentState::Initial);
 
+    let data_sitekey: &str = dotenv!("DATA_SITEKEY");
+    console::log_1(&format!("data_sitekey: {data_sitekey}").into());
+
     let form_submit = move |event: SubmitEvent| {
         event.prevent_default();
 
