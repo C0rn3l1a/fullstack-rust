@@ -28,3 +28,5 @@ serde = { version = "1", features = ["derive"]}
 reqwasm = {version = "0.5", features = ['json']}
 gloo-net = {version = "0.2"}
 anyhow = "1"
+dotenv_codegen = "0.15"
+
