@@ -29,7 +29,6 @@ RUN cd ./backend && cargo build --release
 RUN cp ./backend/target/release/backend ./server
 RUN rm -rf ./backend
 
-
 # Compile frontend
 RUN cd ./frontend && trunk build --release
 RUN mkdir dist

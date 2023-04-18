@@ -5,7 +5,7 @@ use leptos::{component, view, IntoView, Scope, create_signal, create_local_resou
 
 use anyhow::Result;
 use wasm_bindgen::{UnwrapThrowExt, JsCast};
-use web_sys::{SubmitEvent, HtmlFormElement, FormData, console};
+use web_sys::{SubmitEvent, HtmlFormElement, FormData};
 use api_interfaces::routes::contact::{ContactResponse, ContactBody};
 
 #[derive(Clone,PartialEq,Debug)]
@@ -20,8 +20,6 @@ enum ComponentState {
 pub fn EmailFormComponent(cx: Scope) -> impl IntoView {
     let (form_value, set_form_value): (ReadSignal<Option<ContactBody>>, WriteSignal<Option<ContactBody>>) = create_signal(cx, None);
     let (state_value, set_state_value) = create_signal(cx, ComponentState::Initial);
-
-    let data_sitekey: &str = dotenv!("DATA_SITEKEY");
 
     let form_submit = move |event: SubmitEvent| {
         event.prevent_default();
@@ -121,7 +119,7 @@ pub fn EmailFormComponent(cx: Scope) -> impl IntoView {
 
             <div class="flex items-center justify-center gap-4 mt-auto">
                 // The following line controls and configures the Turnstile widget.
-                <div class="cf-turnstile" data-sitekey={data_sitekey} data-theme="dark"></div>
+                <div class="cf-turnstile" data-sitekey="0x4AAAAAAADus3Ly5ek0LbB3" data-theme="dark"></div>
                 // end.
             </div>
             <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async=true defer=true></script>
