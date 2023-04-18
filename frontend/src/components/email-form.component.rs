@@ -22,7 +22,6 @@ pub fn EmailFormComponent(cx: Scope) -> impl IntoView {
     let (state_value, set_state_value) = create_signal(cx, ComponentState::Initial);
 
     let data_sitekey: &str = dotenv!("DATA_SITEKEY");
-    console::log_1(&format!("data_sitekey: {data_sitekey}").into());
 
     let form_submit = move |event: SubmitEvent| {
         event.prevent_default();
@@ -122,7 +121,7 @@ pub fn EmailFormComponent(cx: Scope) -> impl IntoView {
 
             <div class="flex items-center justify-center gap-4 mt-auto">
                 // The following line controls and configures the Turnstile widget.
-                <div class="cf-turnstile" data-sitekey="0x4AAAAAAADus3Ly5ek0LbB3" data-theme="dark"></div>
+                <div class="cf-turnstile" data-sitekey={data_sitekey} data-theme="dark"></div>
                 // end.
             </div>
             <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async=true defer=true></script>
