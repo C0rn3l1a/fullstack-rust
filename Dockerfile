@@ -15,6 +15,8 @@ RUN cd ./frontend && NODE_ENV=production tailwindcss -c ./tailwind.config.js -o 
 # Compile Rust
 FROM rust:latest AS builder
 ENV RUST_LOG "info"
+ARG DATA_SITEKEY
+ENV DATA_SITEKEY $DATA_SITEKEY
 
 # Install compilation deps
 RUN cargo install --locked trunk
