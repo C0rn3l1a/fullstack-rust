@@ -8,4 +8,4 @@ target
 .env
 
 # Frontend
-*/tailwind.css
+frontend/*/tailwind.css
