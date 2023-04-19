@@ -10,7 +10,7 @@ WORKDIR /
 COPY . .
 
 RUN npm i -g tailwindcss
-RUN cd ./frontend && NODE_ENV=production tailwindcss -c ./tailwind.config.js -o ./staic/tailwind.css --minify
+RUN cd ./frontend && NODE_ENV=production tailwindcss -c ./tailwind.config.js -o ./static/tailwind.css --minify
 
 # Compile Rust
 FROM rust:latest AS builder
